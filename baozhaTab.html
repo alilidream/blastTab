@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    #con{
+        width: 640px;
+        height: 400px;
+        box-shadow: 0 0 10px black;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -200px 0 0 -320px;
+    }
+    </style>
+</head>
+<body>
+    <div id="con"></div>
+</body>
+<script type="text/javascript">
+    var LNum = 30, TNum = 20;
+    for(var i=0;i<TNum;i++){
+        for(var j=0;j<LNum;j++){
+          var  oDiv = document.createElement('div');
+          oDiv.style.width = con.offsetWidth/LNum+'px';
+          oDiv.style.height = con.offsetHeight/TNum+'px';
+          oDiv.style.float = 'left';
+          console.log(con.offsetWidth/LNum,con.offsetHeight/TNum)
+          oDiv.style.background = "url('./images/timg.jpg') "
+                                    +con.offsetWidth/LNum*(-j)+"px "
+                                    +con.offsetHeight/TNum*(-i)+"px";
+          oDiv.style.transition = Math.random()*0.5+0.9+'s all ease';
+          con.appendChild(oDiv) ;
+        }
+    }
+
+    var allDiv = con.children;
+    setTimeout(function(){
+        for(var ai=0;ai<allDiv.length;ai++){
+            allDiv[ai].style.transform = 
+                'perspective('
+                +((Math.random()*300)+500)+
+                'px) rotateX('
+                +(Math.random()*360-180)+
+                'deg) rotateY('
+                +(Math.random()*360-180)+
+                'deg) scale('
+                +(Math.random()*2.5+0.5)
+                +') translateX('
+                +(Math.random()*360-180)
+                +'px) translateY('
+                +(Math.random()*360-180)+'px)';
+
+            allDiv[ai].style.option = '0';
+        }
+    },1000);
+    
+</script>
+</html>
