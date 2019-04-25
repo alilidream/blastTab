@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    #con{
+        width: 640px;
+        height: 400px;
+        box-shadow: 0 0 10px black;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -200px 0 0 -320px;
+    }
+    </style>
+</head>
+<body>
+    <div id="con"></div>
+</body>
+<script type="text/javascript">
+    var divJson = {
+        "width" : "100%",
+        "height" : "100%",
+        "position" : "absolute",
+        "background" : "red"
+    }
+    var arr = ['01.jpg','02.png','03.png','04.png']
+    var oDivPar = document.createElement('div');
+    var indexNum = 999999; 
+    var imgIndex = 0;
+    
+    createNode(25,20);
+
+    function createNode(L,T){
+        var oDivPar = document.createElement('div');
+
+        // for(var t in divJson){
+           //oDivPar.style[t]?????
+            // oDivPar.style[t] = divJson[t];
+        // }
+        oDivPar.style.width = '100%';
+        oDivPar.style.height = '100%';
+        oDivPar.style.position = 'absolute';
+        indexNum--;
+        oDivPar.style.zIndex = indexNum;
+        
+        con.appendChild(oDivPar);
+
+        var LNum = L, TNum = T;
+        imgIndex++;
+        for(var i=0;i<TNum;i++){
+            for(var j=0;j<LNum;j++){
+            var  oDiv = document.createElement('div');
+            oDiv.style.width = con.offsetWidth/LNum+'px';
+            oDiv.style.height = con.offsetHeight/TNum+'px';
+            oDiv.style.float = 'left';
+
+            if(imgIndex==4){imgIndex=0};
+            oDiv.style.background = "url('./images/"+arr[imgIndex]+"') "
+                                    +con.offsetWidth/LNum*(-j)+"px "
+                                    +con.offsetHeight/TNum*(-i)+"px";
+             
+           
+            oDiv.style.transition = Math.random()*0.5+0.9+'s all ease';
+            oDivPar.appendChild(oDiv) ;
+            }
+        }
+
+        setTimeout(function(){
+            //oDiv的transition的时间是Math.random()*0.5+0.9
+            //最大是1400，到1400时清空下oDivPar中的子元素
+            setTimeout(function(){  
+                oDivPar.parentNode.removeChild(oDivPar);
+            },1400);
+
+            var allDiv = oDivPar.children;
+            setTimeout(function(){
+                for(var ai=0;ai<allDiv.length;ai++){
+                    allDiv[ai].style.transform = 
+                        'perspective('
+                        +((Math.random()*300)+500)+
+                        'px) rotateX('
+                        +(Math.random()*720-360)+
+                        'deg) rotateY('
+                        +(Math.random()*360-180)+
+                        'deg) scale('
+                        +(Math.random()*2.5+0.5)
+                        +') translateX('
+                        +(Math.random()*360-180)
+                        +'px) translateY('
+                        +(Math.random()*360-180)+'px)';
+
+                    allDiv[ai].style.opacity = '0';
+                }
+                console.log(L,T,LNum,TNum)
+                createNode(LNum,TNum);
+            },500);
+        },1000)
+        
+    }
+    
+</script>
+</html>
